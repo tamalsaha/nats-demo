@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/tamalsaha/nats-demo/api"
 	"io"
 	"log"
 	"math/rand"
@@ -27,7 +29,7 @@ func main() {
 func run() error {
 	conn, err := stan.Connect(
 		"test-cluster",
-		"test-client",
+		"cluster-api-worker",
 		stan.NatsURL("nats://localhost:4222"),
 	)
 	if err != nil {
@@ -38,7 +40,13 @@ func run() error {
 	var lastProcessed uint64
 	var i int
 
-	sub, err := conn.Subscribe("counter", func(msg *stan.Msg) {
+	sub, err := conn.Subscribe("create-cluster", func(msg *stan.Msg) {
+		var info api.ClusterInfo
+		err := json.Unmarshal(msg.Data, &info)
+		if err != nil {
+			// what to do?
+		}
+
 		var processed bool
 
 		if msg.Sequence > lastProcessed {
