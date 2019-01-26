@@ -2,15 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/golang/glog"
+	"github.com/nats-io/go-nats-streaming"
 	"github.com/tamalsaha/nats-demo/api"
+	"github.com/tamalsaha/nats-demo/util"
 	"io"
 	"log"
-	"math/rand"
-	"sync/atomic"
-	"time"
-
-	stan "github.com/nats-io/go-nats-streaming"
 )
 
 func logCloser(c io.Closer) {
@@ -26,10 +23,15 @@ func main() {
 	<-make(chan interface{})
 }
 
+const (
+	ClusterID = "test-cluster"
+	ClientID = "worker-0"
+)
+
 func run() error {
 	conn, err := stan.Connect(
 		"test-cluster",
-		"cluster-api-worker",
+		ClientID,
 		stan.NatsURL("nats://localhost:4222"),
 	)
 	if err != nil {
@@ -37,41 +39,34 @@ func run() error {
 	}
 	defer logCloser(conn)
 
-	var lastProcessed uint64
-	var i int
-
-	sub, err := conn.Subscribe("create-cluster", func(msg *stan.Msg) {
-		var info api.ClusterInfo
+	sub, err := conn.QueueSubscribe("create-cluster", "cluster-api-workers", func(msg *stan.Msg) {
+		var info api.ClusterOperation
 		err := json.Unmarshal(msg.Data, &info)
 		if err != nil {
-			// what to do?
+			// fail to unmarshal operation, log and ACK()
+			glog.Errorf("seq = %d [redelivered = %v, data = %v, err = %v]\n", msg.Sequence, msg.Redelivered, msg.Data, err)
+			return
 		}
 
-		var processed bool
+		// Look up in database to detect if this cluster id was processed before.
+		// if already processed before, then do nothing, just ACK()
+		// if not processed, then process now.
 
-		if msg.Sequence > lastProcessed {
-			processed = true
-			atomic.SwapUint64(&lastProcessed, msg.Sequence)
-		}
+		util.Must(conn.Publish(info.OutputSubject, []byte("performing step 0")))
+		util.DoWork()
 
-		// Add jitter..
-		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
+		util.Must(conn.Publish(info.OutputSubject, []byte("performing step 1")))
+		util.DoWork()
 
-		i++
+		util.Must(conn.Publish(info.OutputSubject, []byte("performing step 2")))
+		util.DoWork()
 
-		var acked bool
-		if i <= 5 {
-			msg.Ack()
-			// Mark it is done.
-			acked = true
-		} else if i == 9 {
-			i = -5
-		}
+		util.Must(msg.Ack())
 
 		// Print the value and whether it was redelivered.
-		fmt.Printf("seq = %d [redelivered = %v, acked = %v, processed = %v]\n", msg.Sequence, msg.Redelivered, acked, processed)
+		glog.Infof("seq = %d [redelivered = %v]\n", msg.Sequence, msg.Redelivered)
 
-	}, stan.SetManualAckMode(), stan.AckWait(time.Second))
+	}, stan.SetManualAckMode() /*, stan.AckWait(time.Second)*/)
 	if err != nil {
 		return err
 	}

@@ -17,10 +17,15 @@ func logCloser(c io.Closer) {
 	}
 }
 
+const (
+	ClusterID = "test-cluster"
+	ClientID = "apiserver-0"
+)
+
 func main() {
 	conn, err := stan.Connect(
-		"test-cluster",
-		"apiserver",
+		ClusterID,
+		ClientID,
 		stan.NatsURL("nats://localhost:4222"),
 	)
 	if err != nil {
@@ -36,14 +41,14 @@ func main() {
 	var clusterId int64 = 0
 
 	m.Post("/clusters", func(ctx *macaron.Context) {
-		id := atomic.AddInt64(&clusterId, 1)
+		id := atomic.AddInt64(&clusterId, 1) // should be a sequence from database
 		out := fmt.Sprintf("cluster-%d", id)
 
-		info := api.ClusterInfo{
+		op := api.ClusterOperation{
 			ClusterId:     id,
-			OutputChannel: out,
+			OutputSubject: out,
 		}
-		data, err := json.Marshal(info)
+		data, err := json.Marshal(op)
 		if err != nil {
 			ctx.Error(500, err.Error())
 			return

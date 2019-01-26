@@ -1,10 +1,11 @@
 package api
 
-type ClusterInfo struct {
-	ClusterId int64
-	OutputChannel string
+type ClusterOperation struct {
+	ClusterId     int64 `json:"clusterId"`
+	OutputSubject string `json:"outputSubject"` // output nats subject where cluster outputs are sent
 }
 
 type ClusterCreateResponse struct {
 	OutputChannel string
 }
+
