@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91989894-6b71-47ab-9fe7-a2c9bf23c410" name="Default Changelist" comment="" />
+    <list default="true" id="91989894-6b71-47ab-9fe7-a2c9bf23c410" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/apiserver/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/apiserver/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/worker/main.go" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,11 +13,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/worker/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+            <state relative-caret-position="136">
+              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apiserver/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -36,6 +48,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/worker/main.go" />
+        <option value="$PROJECT_DIR$/apiserver/main.go" />
       </list>
     </option>
   </component>
@@ -60,6 +74,11 @@
             <path>
               <item name="nats-demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="nats-demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nats-demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nats-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="apiserver" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nats-demo" type="b2602c69:ProjectViewProjectNode" />
@@ -153,8 +172,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/worker/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+        <state relative-caret-position="136">
+          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apiserver/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
         </state>
       </provider>
     </entry>
