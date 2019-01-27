@@ -1,5 +1,7 @@
 # github.com/Unknwon/com v0.0.0-20181010210213-41959bdd855f
 github.com/Unknwon/com
+# github.com/go-macaron/binding v0.0.0-20170611065819-ac54ee249c27
+github.com/go-macaron/binding
 # github.com/go-macaron/inject v0.0.0-20160627170012-d8a0b8677191
 github.com/go-macaron/inject
 # github.com/gogo/protobuf v1.2.0

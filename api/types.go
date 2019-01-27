@@ -9,3 +9,6 @@ type ClusterCreateResponse struct {
 	OutputChannel string
 }
 
+type TokenForm struct {
+	Token          string `form:"token" binding:"Required"`
+}
