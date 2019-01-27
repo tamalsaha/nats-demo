@@ -10,6 +10,7 @@ require (
 	github.com/gogo/protobuf v1.2.0 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
+	github.com/gorilla/websocket v1.4.0
 	github.com/hashicorp/go-immutable-radix v1.0.0 // indirect
 	github.com/hashicorp/go-msgpack v0.5.3 // indirect
 	github.com/hashicorp/raft v1.0.0 // indirect
