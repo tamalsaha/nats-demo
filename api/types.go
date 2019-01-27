@@ -10,5 +10,5 @@ type ClusterCreateResponse struct {
 }
 
 type TokenForm struct {
-	Token          string `form:"token" binding:"Required"`
+	Token          string `form:"jwt" binding:"Required"`
 }
