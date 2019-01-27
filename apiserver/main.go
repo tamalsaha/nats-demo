@@ -40,6 +40,10 @@ func main() {
 
 	var clusterId int64 = 0
 
+	m.Post("/token", func() {})
+	m.Post("/verify_token", func() {})
+
+
 	m.Post("/clusters", func(ctx *macaron.Context) {
 		id := atomic.AddInt64(&clusterId, 1) // should be a sequence from database
 		out := fmt.Sprintf("cluster-%d", id)
