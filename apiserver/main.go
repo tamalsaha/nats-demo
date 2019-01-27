@@ -59,10 +59,12 @@ func main() {
 			return
 		}
 
+		now := time.Now()
 		cl := jwt.Claims{
 			Subject:   "subject",
 			Issuer:    "issuer",
-			NotBefore: jwt.NewNumericDate(time.Date(2016, 1, 1, 0, 0, 0, 0, time.UTC)),
+			NotBefore: jwt.NewNumericDate(now),
+			Expiry:    jwt.NewNumericDate(now.Add(30 * 24 * time.Hour)),
 			Audience:  jwt.Audience{"ws"},
 		}
 		raw, err := jwt.Signed(sig).Claims(cl).CompactSerialize()
@@ -83,7 +85,7 @@ func main() {
 
 		out := jwt.Claims{}
 		if err := token.Claims(sharedKey, &out); err != nil {
-			ctx.Error(500, err.Error())
+			ctx.Error(401, err.Error()) // ask for a new token
 			return
 		}
 		ctx.JSON(200, out)
