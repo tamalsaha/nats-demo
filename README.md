@@ -13,6 +13,7 @@ nats-streaming-server -m 8222 \
 - https://nats.io/documentation/writing_applications/concepts/
 - https://nats.io/documentation/writing_applications/subjects/
 - https://nats.io/documentation/writing_applications/connecting/
+- code examples: https://github.com/nats-io/go-nats
 
 ## nats.io streaming:
 - https://nats.io/documentation/streaming/nats-streaming-intro/
