@@ -19,4 +19,8 @@ nats-streaming-server -m 8222 \
 - https://nats.io/documentation/streaming/nats-streaming-intro/
 - https://nats.io/blog/use-cases-for-persistent-logs-with-nats-streaming/
 
+`That is, no two connections with the same client ID will be able to run concurrently.`
+- https://nats-io.github.io/docs/nats_streaming/client-connections.html
+
+
 ## Video Explainer (audio in Bangla): https://youtu.be/J-EV3GmWkuM
